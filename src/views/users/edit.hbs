@@ -1,0 +1,64 @@
+{{#if users.dni }}
+<div class="container p-4">
+  <div class="row">
+    <div class="col md-4 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <form action="/users/edit/{{users.dni}}" method="POST">
+          <div class="form-group">
+              Debe confirmar si son correctos sus Nombres y Apellidos para la emisión de su Certificado
+            </div>
+            <div class="form-group font-weight-bold">
+              <h3>{{ users.fullname }}</h3>
+              <input type="hidden" class="form-control" name="fullname" value="{{ users.fullname }}">
+            </div>
+            <div class="form-group form-check">
+              <input class="form-check-input" type="radio" name="is_checked" id="yesCheck" value="0" onclick="javascript:yesnoCheck();">
+              <label class="form-check-label" for="yesCheck">
+                <span class="text-success font-weight-bold">SI</span> <span class="text-success">es correcto</span> 
+              </label>
+            </div>
+            <div class=" form-group form-check">
+              <input class="form-check-input" type="radio" name="is_checked" id="noCheck" value="1" onclick="javascript:yesnoCheck();">
+              <label class="form-check-label" for="noCheck">
+                <span class="text-danger font-weight-bold">NO</span> <span class="text-danger">es correcto</span>
+              </label>
+            </div>
+            <div  id="ifYes" class="form-group" style="visibility:hidden">
+              <input type="text" class="form-control" name="fullname_certificado" placeholder="Escriba sus Nombres y Apellidos para el Certificado" value="{{ users.fullname_certificado }}">
+            </div>
+            <div class="from-group">
+              <button class="btn btn-success btn-block">
+                Guardar
+              </button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{else}}
+<div class="container p-4">
+  <div class="row">
+    <div class="col md-4 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          DNI ingresado no existe
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/if}}
+<script type="text/javascript">
+
+function yesnoCheck() {
+    if (document.getElementById('yesCheck').checked) {
+        document.getElementById('ifYes').style.visibility = 'hidden';
+    }
+    else document.getElementById('ifYes').style.visibility = 'visible';
+
+}
+
+</script>
